@@ -7,7 +7,6 @@ RUN apt-get update -qq && apt-get install -y curl unzip jq && \
 
 WORKDIR /app
 
-COPY scripts/restore-config.sh ./restore-config.sh
-RUN chmod +x ./restore-config.sh
+COPY scripts .
 
-ENTRYPOINT "./restore-config.sh"
+CMD ["echo", "Please use one of the make commands to run this."]
