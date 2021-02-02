@@ -5,4 +5,3 @@ services:
     volumes:
       - $HOME/.aws/credentials:/root/.aws/credentials:ro
       - $HOME/.aws/config:/root/.aws/config:ro
-      - ./scripts:/app
