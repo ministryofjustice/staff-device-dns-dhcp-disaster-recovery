@@ -4,4 +4,4 @@ services:
     build: .
     volumes:
       - $HOME/.aws/credentials:/root/.aws/credentials:ro
-      - ./scripts:/app
+      - $HOME/.aws/config:/root/.aws/config:ro
