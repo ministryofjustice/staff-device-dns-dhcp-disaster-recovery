@@ -20,5 +20,5 @@ read -p "Copy and paste the VersionId to roll back to: " version
 aws s3api get-object --bucket staff-device-$env-$service-config-bucket --key $key --version-id $version $key > /dev/null
 aws s3api put-object --bucket staff-device-$env-$service-config-bucket --key $key --body $key > /dev/null
 rm -f $key
-echo "Succesfully rolled back $service to version: $version"
+echo "Successfully rolled back $service to version: $version"
 exit
