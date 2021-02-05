@@ -1,19 +1,34 @@
 # Staff device DNS DHCP disaster recovery
 
-This repo contains an interactive script which can be used to roll back a corrupt config file for the [DNS](https://github.com/ministryofjustice/staff-device-dns-server) or [DHCP](https://github.com/ministryofjustice/staff-device-dhcp-server) services. This script will directly publish the config file into the production s3 bucket, any subsequent admin portal updates will override this restored file.
+This repo contains an interactive script which can be used to roll back a corrupt config file for the [DNS](https://github.com/ministryofjustice/staff-device-dns-server) or [DHCP](https://github.com/ministryofjustice/staff-device-dhcp-server) services.
 
 ## Prerequisites
 
-- Docker
-- Production [AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) configured locally.
-- Profile name must be `moj-staff-device-production`
+- (AWS Vault)[https://github.com/99designs/aws-vault#installing] configured for the corrupted environment
+- (jq)[https://stedolan.github.io/jq/] 
 
-## How to run this script
+## Recovering from a Disaster
+In the event that Grafana has alerted on a distaster scenario, find the correct section and follow the steps provided.
+### Corrupt Config 
+1. Identify the broken service (dns/dhcp) and environment (development/pre-production/production)
+2. Run:
+   1. `aws-vault exec CORRUPT_ENVIRONMENT_VAULT_PROFILE_NAME -- make restore-dns-dhcp-config`
+   2. At the prompt, enter the environment name (development/pre-production/production)
+   3. At the second prompt, enter the corrupt service name (dns/dhcp)
+   4. You will be given an output of the last five published configs with their `VersionId` and `LastModified`
+   5. Copy the `VersionId` of the config you wish to restore to
+   6. At the final prompt, paste the `VersionId`
+   7. The terminal will exit with the following command: `Succesfully rolled back dhcp to version: VersionId`
 
-1. Clone this repo locally.
-2. Run either:
-    - `make restore-dns-dhcp-config`
-    - `make restore-service-container`
-3. Select the service, either 'dns' or 'dhcp'. Do not include the quotes.
-4. Select the version of the configuration based on the timestamp.
-5. When prompted, copy and paste the selected version id that you would like to roll back to.
+
+### Corrupt Container
+1. Identify the broken service (dns/dhcp) and environment (development/pre-production/production)
+2. Run:
+   1. `aws-vault exec CORRUPT_ENVIRONMENT_VAULT_PROFILE_NAME -- make restore-dns-dhcp-config`
+   2. At the prompt, enter the environment name (development/pre-production/production)
+   3. At the second prompt, enter the corrupt service name (dns/dhcp)
+   4. You will be given an output of the last five published configs with their `VersionId` and `LastModified`
+   5. Copy the `VersionId` of the config you wish to restore to
+   6. At the final prompt, paste the `VersionId`
+   7. The terminal will exit with the following command: `Succesfully rolled back dhcp to version: VersionId`
+
