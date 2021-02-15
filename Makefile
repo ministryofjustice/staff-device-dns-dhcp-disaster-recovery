@@ -1,8 +1,5 @@
-build:
-	docker-compose build
+restore-dns-dhcp-config: 
+	./scripts/restore-dns-dhcp-config.sh
 
-restore-dns-dhcp-config: build
-	docker-compose run --rm app ./restore-dns-dhcp-config.sh
-
-restore-service-container: build
-	docker-compose run --rm app ./restore-service-container.sh
+restore-service-container:
+	./scripts/restore-service-container.sh
