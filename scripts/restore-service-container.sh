@@ -15,10 +15,10 @@ fi
 
 aws ecr describe-images \
   --query 'reverse(sort_by(imageDetails,& imagePushedAt))[:5]' \
-  --repository-name staff-device-"$env"-"$service"-docker --no-paginate --output json | jq '.[] | {imageDigest: .imageDigest, imagePushedAt: .imagePushedAt, imageTags: .imageTags[0]}'
+  --repository-name staff-device-"$env"-"$service" --no-paginate --output json | jq '.[] | {imageDigest: .imageDigest, imagePushedAt: .imagePushedAt, imageTags: .imageTags[0]}'
 
 read -p "Copy and paste the imageDigest to re-tag as latest: " imageDigest
-MANIFEST=$(aws ecr batch-get-image --repository-name staff-device-"$env"-"$service"-docker --image-ids imageDigest="$imageDigest" --query images[].imageManifest --output text)
-aws ecr put-image --repository-name staff-device-"$env"-"$service"-docker --image-tag latest --image-manifest "$MANIFEST"
+MANIFEST=$(aws ecr batch-get-image --repository-name staff-device-"$env"-"$service" --image-ids imageDigest="$imageDigest" --query images[].imageManifest --output text)
+aws ecr put-image --repository-name staff-device-"$env"-"$service" --image-tag latest --image-manifest "$MANIFEST"
 echo "Successfully re-tagged image: $imageDigest as latest"
 exit
