@@ -4,8 +4,8 @@ This repo contains an interactive script which can be used to roll back a corrup
 
 ## Prerequisites
 
-- (AWS Vault)[https://github.com/99designs/aws-vault#installing] configured for the corrupted environment
-- (jq)[https://stedolan.github.io/jq/] 
+- [AWS Vault](https://ministryofjustice.github.io/cloud-operations/documentation/team-guide/best-practices/use-aws-sso.html#configure-aws-vault) configured for the corrupted environment
+- [jq](https://stedolan.github.io/jq/) to slice and filter and map and transform structured data
 
 ## Recovering from a Disaster
 In the event that Grafana has alerted on a disaster scenario, find the correct section and follow the steps provided.
