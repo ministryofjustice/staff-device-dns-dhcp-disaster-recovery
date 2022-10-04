@@ -1,3 +1,5 @@
+[![repo standards badge](https://img.shields.io/badge/dynamic/json?color=blue&style=flat&logo=github&labelColor=32393F&label=MoJ%20Compliant&query=%24.result&url=https%3A%2F%2Foperations-engineering-reports.cloud-platform.service.justice.gov.uk%2Fapi%2Fv1%2Fcompliant_public_repositories%2Fstaff-device-dns-dhcp-disaster-recovery)](https://operations-engineering-reports.cloud-platform.service.justice.gov.uk/public-github-repositories.html#staff-device-dns-dhcp-disaster-recovery "Link to report")
+
 # Staff device DNS DHCP disaster recovery
 
 This repo contains an interactive script which can be used to roll back a corrupt config file for the [DNS](https://github.com/ministryofjustice/staff-device-dns-server) or [DHCP](https://github.com/ministryofjustice/staff-device-dhcp-server) services.
